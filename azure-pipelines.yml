@@ -16,12 +16,3 @@ pool:
       # Write your commands here
       
       echo 'Hello world'
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      curl -fLsS -o bridge.zip $(BRIDGE_URL)
-      rm -rf /tmp/bridge && unzip -q -d /tmp/bridge bridge.zip && rm -f bridge.zip
-      /tmp/bridge/bridge --stage polaris polaris.serverUrl=$(BRIDGE_POLARIS_SERVERURL) polaris.application.name=$(BRIDGE_POLARIS_APPLICATION_NAME) polaris.project.name=$(BRIDGE_POLARIS_PROJECT_NAME) polaris.assessment.types='["SAST","SCA"]' polaris.accessToken=$(BRIDGE_POLARIS_ACCESSTOKEN
