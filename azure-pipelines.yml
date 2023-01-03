@@ -14,6 +14,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      # Write your commands here
-      
-      echo 'Hello world'
+      export BRIDGE_POLARIS_APPLICATION_NAME=rmichael-app
+      export BRIDGE_POLARIS_PROJECT_NAME=P5
+      curl -fLsS -o $(Agent.TempDirectory)/bridge.zip $BRIDGE
+      unzip -qo -d $(Agent.TempDirectory)/bridge $(Agent.TempDirectory)/bridge.zip
+      $(Agent.TempDirectory)/bridge/bridge --stage polaris polaris.assessment.types='["SAST","SCA"]'
+  displayName: 'Polaris Scan'
+
