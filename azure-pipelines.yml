@@ -16,8 +16,9 @@ steps:
     script: |
       export BRIDGE_POLARIS_APPLICATION_NAME=rmichael-app
       export BRIDGE_POLARIS_PROJECT_NAME=P5
+      export BRIDGE_POLARIS_ACCESSTOKEN=$(BRIDGE_POLARIS_ACCESSTOKEN)
       curl -fLsS -o $(Agent.TempDirectory)/bridge.zip $BRIDGE
       unzip -qo -d $(Agent.TempDirectory)/bridge $(Agent.TempDirectory)/bridge.zip
-      $(Agent.TempDirectory)/bridge/bridge --stage polaris polaris.assessment.types='["SAST","SCA"]'
+      $(Agent.TempDirectory)/bridge/bridge --stage polaris polaris.serverUrl=https://poc.polaris.synopsys.com polaris.application.name="rmichael-app" polaris.project.name="P5" polaris.assessment.types=[\"SAST\",\"SCA\"]
   displayName: 'Polaris Scan'
 
